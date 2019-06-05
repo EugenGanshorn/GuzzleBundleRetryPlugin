@@ -1,0 +1,50 @@
+{
+  "name": "eugenganshorn/guzzle-bundle-retry-plugin",
+  "type": "library",
+  "description": "Retry Plugin for Guzzle Bundle, a PHP HTTP client library and framework for building RESTful web service clients",
+  "keywords": [
+    "retry",
+    "middleware",
+    "plugin",
+    "framework",
+    "http",
+    "rest",
+    "web service",
+    "curl",
+    "client",
+    "HTTP client"
+  ],
+  "homepage": "https://github.com/EugenGanshorn/GuzzleBundleRetry",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Eugen Ganshorn",
+      "email": "eugen@ganshorn.eu",
+      "homepage": "https://github.com/EugenGanshorn"
+    },
+    {
+      "name": "Community",
+      "homepage": "https://github.com/EugenGanshorn/GuzzleBundleRetry/contributors"
+    }
+  ],
+  "require": {
+    "php": "^7.3",
+    "guzzlehttp/guzzle": "^6.0",
+    "eightpoints/guzzle-bundle": "~7.1",
+    "caseyamcl/guzzle_retry_middleware": "^2.2",
+    "symfony/dependency-injection": "~2.7|~3.0|~4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~6.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "EugenGanshorn\\Bundle\\GuzzleBundleRetryPlugin\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "EugenGanshorn\\Bundle\\GuzzleBundleRetryPlugin\\Tests\\": "tests"
+    }
+  }
+}
