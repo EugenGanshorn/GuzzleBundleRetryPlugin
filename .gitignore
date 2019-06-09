@@ -1,5 +1,5 @@
 /phpunit.xml
 /.phpunit.result.cache
 /vendor/
-/coverage/
+/build/
 /.php_cs.cache
