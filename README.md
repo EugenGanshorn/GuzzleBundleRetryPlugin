@@ -64,7 +64,7 @@ foreach ($contents as $class => $envs) {
 
 ### Basic configuration
 ``` yaml
-# app/config/config.yml
+# app/config/config.yml // config/packages/eight_points_guzzle.yaml
 
 eight_points_guzzle:
     clients:
