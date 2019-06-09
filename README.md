@@ -1,5 +1,6 @@
 # GuzzleBundleRetryPlugin
 [![Build Status](https://travis-ci.org/EugenGanshorn/GuzzleBundleRetryPlugin.svg?branch=master)](https://travis-ci.org/EugenGanshorn/GuzzleBundleRetryPlugin)
+[![Coverage Status](https://coveralls.io/repos/github/EugenGanshorn/GuzzleBundleRetryPlugin/badge.svg?branch=master)](https://coveralls.io/github/EugenGanshorn/GuzzleBundleRetryPlugin?branch=master)
 
 ## Requirements
  - PHP 7.3 or above
