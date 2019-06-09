@@ -77,6 +77,10 @@ eight_points_guzzle:
                 retry:
                     ~
 ```
+### Advanced configuration
+See middleware options:
+https://github.com/caseyamcl/guzzle_retry_middleware#options
+
 ## License
 This middleware is licensed under the MIT License - see the LICENSE file for details
 
