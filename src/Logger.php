@@ -30,7 +30,8 @@ class Logger implements LoggerAwareInterface
         Response $response
     ) {
         $this->logger->info(
-            sprintf('%s - will wait %01.2f seconds and try it again, this is attempt #%d',
+            sprintf(
+                '%s - will wait %01.2f seconds and try it again, this is attempt #%d',
                 $this->formatter->format($request, $response),
                 $delay,
                 $attemptNumber
