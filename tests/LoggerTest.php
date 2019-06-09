@@ -1,7 +1,6 @@
 <?php
 
 use EugenGanshorn\Bundle\GuzzleBundleRetryPlugin\Logger;
-use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
