@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
+use Psr\Log\Test\TestLogger;
 
 class LoggerTest extends TestCase
 {
@@ -41,5 +42,19 @@ class LoggerTest extends TestCase
         $sut->setLogger($logger);
         $sut->setFormatter($formatter);
         $sut->callback(7, 42.7, $request, [], $response);
+    }
+
+    public function testCallbackWithoutResponse(): void
+    {
+        $request   = new Request('POST', '/test');
+        $logger    = new TestLogger();
+        $formatter = new MessageFormatter();
+
+        $sut = new Logger();
+        $sut->setLogger($logger);
+        $sut->setFormatter($formatter);
+        $sut->callback(7, 42.7, $request, []);
+
+        $this->assertTrue($logger->hasInfoThatContains('will wait 42.70 seconds and try it again, this is attempt #7'));
     }
 }

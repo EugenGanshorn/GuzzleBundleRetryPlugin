@@ -27,7 +27,7 @@ class Logger implements LoggerAwareInterface
         $delay,
         Request $request,
         $options,
-        Response $response
+        ?Response $response = null
     ) {
         $this->logger->info(
             sprintf(
