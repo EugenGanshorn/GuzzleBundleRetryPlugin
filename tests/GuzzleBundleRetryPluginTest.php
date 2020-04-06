@@ -1,6 +1,6 @@
 <?php
 
-use EightPoints\Bundle\GuzzleBundle\EightPointsGuzzleBundlePlugin;
+use EightPoints\Bundle\GuzzleBundle\PluginInterface;
 use EugenGanshorn\Bundle\GuzzleBundleRetryPlugin\GuzzleBundleRetryPlugin;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -18,7 +18,7 @@ class GuzzleBundleRetryPluginTest extends TestCase
 
     public function testSubClassesOfPlugin()
     {
-        $this->assertInstanceOf(EightPointsGuzzleBundlePlugin::class, $this->plugin);
+        $this->assertInstanceOf(PluginInterface::class, $this->plugin);
         $this->assertInstanceOf(Bundle::class, $this->plugin);
     }
 
