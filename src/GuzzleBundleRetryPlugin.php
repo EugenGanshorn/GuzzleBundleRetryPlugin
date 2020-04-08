@@ -2,7 +2,7 @@
 
 namespace EugenGanshorn\Bundle\GuzzleBundleRetryPlugin;
 
-use EightPoints\Bundle\GuzzleBundle\EightPointsGuzzleBundlePlugin;
+use EightPoints\Bundle\GuzzleBundle\PluginInterface;
 use GuzzleRetry\GuzzleRetryMiddleware;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class GuzzleBundleRetryPlugin extends Bundle implements EightPointsGuzzleBundlePlugin
+class GuzzleBundleRetryPlugin extends Bundle implements PluginInterface
 {
     /**
      * The name of this plugin. It will be used as the configuration key.
@@ -28,7 +28,7 @@ class GuzzleBundleRetryPlugin extends Bundle implements EightPointsGuzzleBundleP
      *
      * @return void
      */
-    public function addConfiguration(ArrayNodeDefinition $pluginNode)
+    public function addConfiguration(ArrayNodeDefinition $pluginNode): void
     {
         $pluginNode
             ->canBeEnabled()
@@ -70,7 +70,7 @@ class GuzzleBundleRetryPlugin extends Bundle implements EightPointsGuzzleBundleP
      *
      * @return void
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
     }
 
@@ -84,7 +84,7 @@ class GuzzleBundleRetryPlugin extends Bundle implements EightPointsGuzzleBundleP
      *
      * @return void
      */
-    public function loadForClient(array $config, ContainerBuilder $container, string $clientName, Definition $handler)
+    public function loadForClient(array $config, ContainerBuilder $container, string $clientName, Definition $handler): void
     {
         if ($config['retry_enabled']) {
             $logger = new Definition(Logger::class);
