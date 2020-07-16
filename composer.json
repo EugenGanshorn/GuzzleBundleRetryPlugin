@@ -29,8 +29,8 @@
   ],
   "require": {
     "php": "^7.3",
-    "guzzlehttp/guzzle": "^6.3",
-    "eightpoints/guzzle-bundle": "^8.0",
+    "guzzlehttp/guzzle": "^6.3|^7.0",
+    "eightpoints/guzzle-bundle": "^7.6|^8.0",
     "caseyamcl/guzzle_retry_middleware": "^2.2",
     "symfony/dependency-injection": "^5.0"
   },
