@@ -59,7 +59,10 @@ class GuzzleBundleRetryPlugin extends Bundle implements PluginInterface
                 ->scalarNode('retry_header')
                 ->defaultValue('X-Retry-Counter')
             ->end()
-        ->end();
+                ->scalarNode('on_retry_callback')
+                ->defaultNull()
+            ->end()
+            ->end();
     }
 
     /**
@@ -84,30 +87,33 @@ class GuzzleBundleRetryPlugin extends Bundle implements PluginInterface
      *
      * @return void
      */
-    public function loadForClient(array $config, ContainerBuilder $container, string $clientName, Definition $handler): void
-    {
+    public function loadForClient(
+        array $config,
+        ContainerBuilder $container,
+        string $clientName,
+        Definition $handler
+    ): void {
         if ($config['retry_enabled']) {
             $onRetryCallback = null;
             if ($container->has('monolog.logger.eight_points_guzzle')) {
                 $logger = new Definition(Logger::class);
                 $logger->addMethodCall('setLogger', [new Reference('eight_points_guzzle.logger.class')]);
                 $logger->addMethodCall('setFormatter', [new Reference('eight_points_guzzle.symfony_log_formatter')]);
-                $onRetryCallback = [$logger, 'callback'];
+                $onRetryCallback = null !== $config['on_retry_callback'] ?
+                    new Reference($config['on_retry_callback']) : [$logger, 'callback'];
             }
 
             $middleware = new Definition(GuzzleRetryMiddleware::class);
             $middleware->setFactory([GuzzleRetryMiddleware::class, 'factory']);
             $middleware->setArguments([
-                [
-                    'max_retry_attempts'               => $config['max_retry_attempts'],
-                    'retry_only_if_retry_after_header' => $config['retry_only_if_retry_after_header'],
-                    'retry_on_status'                  => $config['retry_on_status'],
-                    'default_retry_multiplier'         => $config['default_retry_multiplier'],
-                    'retry_on_timeout'                 => $config['retry_on_timeout'],
-                    'expose_retry_header'              => $config['expose_retry_header'],
-                    'retry_header'                     => $config['retry_header'],
-                    'on_retry_callback'                => $onRetryCallback,
-                ],
+                'max_retry_attempts'               => $config['max_retry_attempts'],
+                'retry_only_if_retry_after_header' => $config['retry_only_if_retry_after_header'],
+                'retry_on_status'                  => $config['retry_on_status'],
+                'default_retry_multiplier'         => $config['default_retry_multiplier'],
+                'retry_on_timeout'                 => $config['retry_on_timeout'],
+                'expose_retry_header'              => $config['expose_retry_header'],
+                'retry_header'                     => $config['retry_header'],
+                'on_retry_callback'                => $onRetryCallback,
             ]);
 
             $middleware->setPublic(true);
