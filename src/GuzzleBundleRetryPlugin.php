@@ -87,9 +87,13 @@ class GuzzleBundleRetryPlugin extends Bundle implements PluginInterface
     public function loadForClient(array $config, ContainerBuilder $container, string $clientName, Definition $handler): void
     {
         if ($config['retry_enabled']) {
-            $logger = new Definition(Logger::class);
-            $logger->addMethodCall('setLogger', [new Reference('monolog.logger.eight_points_guzzle')]);
-            $logger->addMethodCall('setFormatter', [new Reference('eight_points_guzzle.symfony_log_formatter')]);
+            $onRetryCallback = null;
+            if ($container->has('monolog.logger.eight_points_guzzle')) {
+                $logger = new Definition(Logger::class);
+                $logger->addMethodCall('setLogger', [new Reference('eight_points_guzzle.logger.class')]);
+                $logger->addMethodCall('setFormatter', [new Reference('eight_points_guzzle.symfony_log_formatter')]);
+                $onRetryCallback = [$logger, 'callback'];
+            }
 
             $middleware = new Definition(GuzzleRetryMiddleware::class);
             $middleware->setFactory([GuzzleRetryMiddleware::class, 'factory']);
@@ -102,7 +106,7 @@ class GuzzleBundleRetryPlugin extends Bundle implements PluginInterface
                     'retry_on_timeout'                 => $config['retry_on_timeout'],
                     'expose_retry_header'              => $config['expose_retry_header'],
                     'retry_header'                     => $config['retry_header'],
-                    'on_retry_callback'                => [$logger, 'callback'],
+                    'on_retry_callback'                => $onRetryCallback,
                 ],
             ]);
 
