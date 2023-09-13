@@ -26,17 +26,8 @@ $ composer require eugenganshorn/guzzle-bundle-retry-plugin
 ## Usage
 ### Enable bundle
 
-#### Symfony 2.x and 3.x
-Plugin will be activated/connected through bundle constructor in `app/AppKernel.php`, like this:
-
-``` php 
-new EightPoints\Bundle\GuzzleBundle\EightPointsGuzzleBundle([
-    new EugenGanshorn\Bundle\GuzzleBundleRetryPlugin\GuzzleBundleRetryPlugin(),
-])
-```
-
 #### Symfony 4
-The registration of bundles was changed in Symfony 4 and now you have to change `src/Kernel.php` to achieve the same functionality.  
+Plugin will be activated/connected through bundle constructor in `app/AppKernel.php`, like this:
 Find next lines:
 
 ```php
