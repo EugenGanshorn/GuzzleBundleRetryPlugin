@@ -62,6 +62,26 @@ foreach ($contents as $class => $envs) {
     }
 }
 ```
+#### Symfony 5 & 6
+Override the `registerBundles` method in `src/Kernel.php` to connect the plugin to the bundle:
+
+```php
+public function registerBundles(): iterable
+{
+    $contents = require $this->getBundlesPath();
+    foreach ($contents as $class => $envs) {
+        if ($envs[$this->environment] ?? $envs['all'] ?? false) {
+            if ($class === EightPointsGuzzleBundle::class) {
+                yield new $class([
+                    new GuzzleBundleRetryPlugin(),
+                ]);
+            } else {
+                yield new $class();
+            }
+        }
+    }
+}
+```
 
 ### Basic configuration
 ``` yaml
