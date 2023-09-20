@@ -3,7 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/EugenGanshorn/GuzzleBundleRetryPlugin/badge.svg?branch=master)](https://coveralls.io/github/EugenGanshorn/GuzzleBundleRetryPlugin?branch=master)
 
 ## Requirements
- - PHP 7.3 or above
+ - PHP 8.0 or above
  - [Guzzle Bundle][1]
  - [Guzzle Retry middleware][2]
 
